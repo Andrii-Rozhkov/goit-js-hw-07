@@ -1,16 +1,12 @@
-const form = document.querySelector('.js-form');
+const btn = document.querySelector('.change-color');
+const background = document.querySelector('span.color');
 
-form.addEventListener('submit', handleSubmit);
+btn.addEventListener('click', getRandomHexColor);
 
-function handleSubmit(event) {
-  event.preventDefault();
-  const elements = event.target.elements;
+function getRandomHexColor() {
+  const color = `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0')}`;
 
-  const info = {
-    email: elements.email.value,
-    password: elements.password.value,
-    comment: elements.comment.value,
-  };
-
-  console.log(info);
+  background.style.backgroundColor = color;
 }
