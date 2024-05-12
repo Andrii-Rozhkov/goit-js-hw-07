@@ -4,22 +4,45 @@ const createBtn = document.querySelector('button[data-create]');
 
 const destroyBtn = document.querySelector('button[data-destroy]');
 
-const boxes = document.querySelector('div[id="boxes]');
+const boxes = document.querySelector('div[id="boxes"]');
 
-let width = 30;
+createBtn.addEventListener('click', createMarkup);
 
-let hight = 30;
+destroyBtn.addEventListener('click', cleanUp);
 
+let sizes = 30;
 
-if (input.value < 1 || input.value > 100) {
-  return "Error";
-} else {
-  1
+function cleanUp() {
+  boxes.innerHTML = '';
+  sizes = 30;
 }
 
+function createMarkup() {
+  if (input.value < 1 || input.value > 100) {
+    console.log('Error');
+    return;
+  }
+  boxes.innerHTML = '';
+  createBoxes(input.value);
+}
 
-RandomHexColor() {
+function createBoxes(amount) {
+  for (let i = 0; i < amount; i++) {
+    const myBox = document.createElement('div');
+    myBox.style.width = `${sizes}px`;
+    myBox.style.height = `${sizes}px`;
+    myBox.style.backgroundColor = RandomHexColor();
+    boxes.append(myBox);
+
+    sizes += 10;
+  }
+
+  input.value = '';
+  sizes = 30;
+}
+
+function RandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
-    .padStart(6, 0)}`;
+    .padStart(6, '0')}`;
 }
